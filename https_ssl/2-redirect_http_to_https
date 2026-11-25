@@ -28,7 +28,7 @@ frontend www-http
 	default_backend www-backend
 
 frontend www-https
-	bind *:443 ssl crt /etc/haproxy/certs/www.__DOMAIN__.pem
+	bind *:443 ssl crt /etc/haproxy/certs/www.tac.tech.pem
 	http-request add-header X-Forwarded-Proto https
 	acl letsencrypt-acl path_beg /.well-known/acme-challenge/
 	use_backend letsencrypt-backend if letsencrypt-acl
@@ -36,8 +36,8 @@ frontend www-https
 
 backend www-backend
 	balance roundrobin
-	server 7310-web-01 __WEB01_IP__:80 check
-	server 7310-web-02 __WEB02_IP__:80 check
+	server 7310-web-01 13.40.149.114:80 check
+	server 7310-web-02 18.175.45.200:80 check
 
 backend letsencrypt-backend
 	server letsencrypt 127.0.0.1:54321
